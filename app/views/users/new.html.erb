@@ -1,0 +1,50 @@
+
+ <% if @user.errors.any? %>
+ <div id="error_explanation">
+ <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2>
+ <ul>
+ <% @user.errors.full_messages.each do |message| %>
+ <li><%= message %></li>
+ <% end %>
+ </ul>
+ </div>
+ <% end %>
+ <%= form_with(model: @user, local: true) do |f| %>
+ <center>
+
+   <div class="container">
+     <div class="connexion">
+       <div class="label_mail">
+         <input type="text" placeholder="Entrer votre nom">
+       </div>
+       <div class="label_pass">
+           <input type="text" placeholder="Entrer le votre Email">
+       </div>
+       <div class="label_mail">
+
+        <%= password_field_tag(:password, "", placeholder: "Password") %>
+       </div>
+       <div class="label_pass">
+          <%= password_field_tag(:password, "", placeholder: "Password-confirme") %>
+       </div>
+       <div class="">
+
+       </div>
+
+     </div>
+
+   </div>
+ </center>
+
+<div class="field">
+
+    <div class="field">
+  <%= f.label :image %>
+  <%= image_tag(@user.avatar1.url) if @user.avatar1 && @user.avatar1.url %>
+  <%= f.file_field :avatar1 %>
+  <%= f.hidden_field :avatar1_cache %>
+    </div>
+
+</div>
+ <%= f.submit "Create my account" %>
+ <% end %>
